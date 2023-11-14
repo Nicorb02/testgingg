@@ -7,7 +7,8 @@
     "build": "npx tsc",
     "start": "node dist/server.js",
     "dev": "nodemon server.ts",
-    "postinstall": "tsc"
+    "postinstall": "tsc",
+    "heroku-postbuiild": "NPM_CONFIG_PRODUCTION=false npm --prefix client install && npm --prefix client run build"
   },
   "engines": {
     "node": "20.9.0",
