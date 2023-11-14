@@ -9,6 +9,10 @@
     "dev": "nodemon server.ts",
     "postinstall": "tsc"
   },
+  "engines": {
+    "node": "20.9.0",
+    "npm": "10.1.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

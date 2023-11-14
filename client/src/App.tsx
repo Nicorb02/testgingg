@@ -1,24 +1,34 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+
+interface BackendData {
+  users: string[];
+}
+
 
 function App() {
+  const [backendData, setBackendData] = useState<BackendData>({ users: [] });
+
+  useEffect(() => {
+    fetch("/ping")
+      .then((response) => response.json())
+      .then((data: BackendData) => {
+        setBackendData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {(typeof backendData.users === 'undefined') ? (
+        <p>Loading...</p>
+      ) : (
+        backendData.users.map((user, i) => (
+          <p key={i}>{ user }</p>
+        ))
+      )}
     </div>
   );
 }
